@@ -39,6 +39,16 @@ var getCommonMixin = {
         return (S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4());
     },
     
+    // populate id field if not present
+    normalizeItems: function(items) {
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            if (!item.id) {
+                item.id = this.generateUid();
+            }
+        }
+    },
+    
     getKeyColNameFromColModel: function(colModel) {
         var keyColName = '';
         if (!colModel) {
