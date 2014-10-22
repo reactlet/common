@@ -23,11 +23,11 @@ var getCommonMixin = {
     },
     
     componentWillMount: function() {
-        //this.intervals = [];
+        this.listenerCol = {};
     },
     
     componentWillUnmount: function() {
-        //this.intervals.map(clearInterval);
+        this.listenerCol = null;
     },
     
     // generate unique id
@@ -46,6 +46,23 @@ var getCommonMixin = {
             if (!item.id) {
                 item.id = this.generateUid();
             }
+        }
+    },
+    
+    on: function(eventName, callback) {
+        if (!this.listenerCol[eventName]) {
+            this.listenerCol[eventName] = [];
+        }
+        this.listenerCol[eventName].push(callback);
+    },
+    
+    fire: function(eventName, values) {
+        if (!this.listenerCol[eventName]) {
+            return;
+        }
+        var callbacks = this.listenerCol[eventName];
+        for (var i = 0; i < callbacks.length; i++) {
+            callbacks[i].apply(null, values);
         }
     },
     
