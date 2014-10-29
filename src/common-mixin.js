@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var getCommonMixin = {
     
     // Invoked once before the component is mounted.
