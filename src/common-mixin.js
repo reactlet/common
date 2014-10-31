@@ -1,4 +1,3 @@
-
 var getCommonMixin = {
     
     // Invoked once before the component is mounted.
